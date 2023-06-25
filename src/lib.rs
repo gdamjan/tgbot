@@ -47,7 +47,7 @@ fn index(_req: Request, _params: Params) -> Result<Response> {
 }
 
 fn show_me(_req: Request, _params: Params) -> Result<Response> {
-    let token = get_token();
+    let token = get_stored_token();
     match token {
         Err(err) => show_error(err),
         Ok(token) => {
@@ -70,7 +70,7 @@ fn show_me(_req: Request, _params: Params) -> Result<Response> {
     }
 }
 
-fn get_token() -> Result<String> {
+fn get_stored_token() -> Result<String> {
     let store = Store::open_default()?;
     store
         .get(TOKEN_STORE_KEY)
