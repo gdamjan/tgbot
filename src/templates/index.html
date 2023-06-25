@@ -1,0 +1,13 @@
+<body>
+  {% include 'navbar.html' %}
+  <pre id="info"></pre>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const r = await fetch("/me");
+      if (r.ok) {
+        document.getElementById("info").textContent = JSON.stringify(await r.json(), undefined, 2);
+      }
+    });
+  </script>
+</body>

@@ -1,0 +1,16 @@
+<nav>
+  <a href="/">Home</a> |
+  <a href="/start" data-method="POST">Start!</a> |
+  <a href="/stop" data-method="POST">Stop!</a> |
+  <a href="/token" data-method="DELETE">Delete Token!</a>
+</nav>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("nav a[data-method]").forEach((link) => {
+    link.addEventListener("click", (ev) => {
+      fetch(link.href, {method:link.dataset.method});
+      ev.preventDefault();
+    });
+  });
+});
+</script>
