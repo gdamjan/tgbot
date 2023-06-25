@@ -130,7 +130,7 @@ fn authorized(req: &Request) -> bool {
     let username = config::get("username").expect("could not get variable");
     let password = config::get("password").expect("could not get variable");
     let user_pass = format!("{}:{}", username, password);
-    let encoded = general_purpose::STANDARD_NO_PAD.encode(user_pass);
+    let encoded = general_purpose::STANDARD.encode(user_pass);
     let expected = format!("Basic {}", encoded);
     let authorized = req
         .headers()
