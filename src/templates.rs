@@ -1,5 +1,5 @@
 use anyhow::Result;
-use minijinja::{path_loader, Environment};
+use minijinja::{Environment, path_loader};
 use serde::Serialize;
 use spin_sdk::http::Response;
 
@@ -17,9 +17,10 @@ where
     let tmpl = env.get_template(name)?;
     let body = tmpl.render(ctx)?;
 
-    let response = http::Response::builder()
-        .status(http::StatusCode::OK)
-        .header(http::header::CONTENT_TYPE, "text/html; charset=\"utf-8\"")
-        .body(Some(body.into()))?;
+    let response = Response::builder()
+        .status(200)
+        .header("content-type", "text/html; charset=\"utf-8\"")
+        .body(body)
+        .build();
     Ok(response)
 }

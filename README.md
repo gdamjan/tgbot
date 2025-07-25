@@ -1,8 +1,8 @@
 # A telegram bot
 
 This bot is designed to be hosted as a reactive WASM application.
-Primarly for [Fermyon Spin](https://developer.fermyon.com/spin/index)
-Framework/Cloud, but conceptualy it would be able to work on any WAGI
+Primarly for [Spinframework](https://spinframework.dev)
+Framework/Cloud, but conceptualy it would be able to work on any WASI
 platform. It'll get telegram message updates via a
 [webhook](https://core.telegram.org/bots/webhooks), since it can't poll
 (or establish a web-socket connection).
@@ -10,15 +10,14 @@ platform. It'll get telegram message updates via a
 ## Quickstart
 
 ```
-fermyon-spin build
-SPIN_CONFIG_PASSWORD="123" SPIN_CONFIG_USERNAME="admin" fermyon-spin up
+SPIN_CONFIG_TELEGRAM_TOKEN="123" spin up --build
 ```
 
 
 ## Deploy to the cloud
 
 ```
-fermyon-spin cloud deploy --variable password=123 --variable username=admin
+spin cloud deploy --variable telegram-token=123
 ```
 
 
@@ -28,3 +27,4 @@ fermyon-spin cloud deploy --variable password=123 --variable username=admin
 - https://developer.fermyon.com/spin/http-trigger
 - https://developer.fermyon.com/spin/http-outbound
 - https://developer.fermyon.com/spin/kv-store-api-guide
+- https://fermyon.github.io/rust-docs/spin/main/spin_core/index.html

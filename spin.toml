@@ -1,31 +1,29 @@
-spin_manifest_version = "1"
+spin_manifest_version = 2
+
+[application]
 name = "gdamjan-tgbot"
 version = "0.1.0"
 description = "A wasm telegram bot"
 authors = ["Дамјан Георгиевски <gdamjan@gmail.com>"]
 
-trigger = { type = "http", base = "/" }
 
 [variables]
-password = { required = true }
-username = { required = true }
+telegram_token = { required = true }
 
-[[component]]
-id = "tgbot"
-source = "target/wasm32-wasi/release/gdamjan_tgbot.wasm"
+[[trigger.http]]
+route = "/..."
+component = "tgbot"
+
+[component.tgbot]
+source = "target/wasm32-wasip2/release/gdamjan_tgbot.wasm"
+files = [{ source = "src/templates/", destination = "/templates/" }]
 allowed_http_hosts = ["api.telegram.org"]
 key_value_stores = ["default"]
-files = [ { source = "src/templates/", destination = "/templates/" } ]
 
-[component.config]
-password = "{{ password }}"
-username = "{{ username }}"
+[component.tgbot.variables]
+telegram_token = "{{ telegram_token }}"
+telegram_api_endpoint = "https://api.telegram.org/bot{{ telegram_token }}"
 
-api_host = "https://api.telegram.org"
-
-[component.trigger]
-route = "/..."
-
-[component.build]
-command = "cargo build --target wasm32-wasi --release"
+[component.tgbot.build]
+command = "cargo build --target wasm32-wasip2 --release"
 watch = ["src/**/*", "Cargo.toml"]

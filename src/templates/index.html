@@ -1,12 +1,22 @@
 <body>
   {% include 'navbar.html' %}
+  <pre id="me"></pre>
   <pre id="info"></pre>
-
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
-      const r = await fetch("/me");
-      if (r.ok) {
-        document.getElementById("info").textContent = JSON.stringify(await r.json(), undefined, 2);
+      const [me, info] = await Promise.all([fetch("/me"), fetch("hookinfo")]);
+      if (me.ok) {
+        document.getElementById("me").textContent = JSON.stringify(await me.json(), undefined, 2);
+      } else {
+        const errMsg = `Status: ${me.status}\n${await me.text()}`;
+        document.getElementById("me").textContent = errMsg;
+      }
+
+      if (info.ok) {
+        document.getElementById("info").textContent = JSON.stringify(await info.json(), undefined, 2);
+      } else {
+        const errMsg = `Status: ${info.status}\n${await info.text()}`;
+        document.getElementById("info").textContent = errMsg;
       }
     });
   </script>

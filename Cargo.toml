@@ -1,20 +1,16 @@
 [package]
 name = "gdamjan-tgbot"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [lib]
-crate-type = [ "cdylib" ]
+crate-type = ["cdylib"]
 
 [dependencies]
 anyhow = "1"
 bytes = "1"
-http = "0.2"
-base64 = { version = "0.21.2", features = [] }
-minijinja = { version ="1.0.0", features = ["loader"] }
+# http = "1"
+minijinja = { version = "2", features = ["loader"] }
 serde = { version = "1.0.164", features = ["derive"] }
 serde_json = "1.0.96"
-spin-sdk = { git = "https://github.com/fermyon/spin", tag = "v1.3.0" }
-# Crate that generates Rust Wasm bindings from a WebAssembly interface.
-wit-bindgen-rust = { git = "https://github.com/bytecodealliance/wit-bindgen", rev = "cb871cfa1ee460b51eb1d144b175b9aab9c50aba" }
-form_urlencoded = { version="1.2.0", features=[] }
+spin-sdk = "4"
